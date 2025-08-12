@@ -1,14 +1,19 @@
 # revkit
 
-Eğitim amaçlı tersine mühendislik aracı. Sadece *kendi derlediğiniz* veya **açıkça izniniz olan** dosyaları analiz edin. Kötüye kullanım yasaktır.
+revkit, eğitim amaçlı bir tersine mühendislik aracı. Kendi derlediğin (veya analiz izni olan) ikili dosyalar üzerinde hızlıca özet çıkarma, string bulma, entropy ölçme, temel disassembly, byte patch etme ve wildcard’lı imza arama yapmanı sağlıyor. CTF/lab seviyesinde “ilk bakış” analizlerinde pratik olsun diye yazıldı.
 
-## Özellikler
-- Dosya türü/magic tespiti (ELF/PE/Mach-O)
-- Bölüm ve temel metadata çıkarımı (LIEF varsa ayrıntılı)
-- String çıkarma (ASCII/UTF-16), entropy hesaplama
-- Basit disassembly (Capstone) — otomatik mimari tespiti (LIEF varsa) veya parametre ile
-- Byte patch etme (offset + hex bayt)
-- Wildcard'lı byte pattern arama (`??` destekli)
+Neleri yapıyor?
+Dosya türü tespiti: ELF / PE / Mach-O (basit “magic” kontrolü).
+
+Özet analiz: Boyut, tür, (LIEF varsa) bölümler ve importlar.
+
+Strings & entropy: ASCII ve basit UTF-16 string’leri listeler; dosyanın entropy değerini hesaplar (0–8).
+
+Disassembly (x86/x64): Capstone ile belli bir aralığı hexdump yerine assembly olarak gösterir (mimariyi LIEF’ten tahmin etmeye çalışır).
+
+Byte patch: Dosyada belirttiğin offset’e hex bayt yazıp yeni bir dosya üretir.
+
+Wildcard pattern arama: E8 ?? ?? ?? ?? 85 C0 gibi maskeli byte imzalarını bulur.
 
 ## Kurulum
 ```bash
